@@ -1,0 +1,7 @@
+name: Surwer
+version: '${project.version}'
+main: com.github.dovoloo.surwer.Surwer
+api-version: 1.19
+authors: [dovoloo]
+description: A plugin for transferring player data using MySQL
+website: https://github.com/dovoloo

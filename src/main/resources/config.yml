@@ -1,0 +1,12 @@
+#The prefix of the plugin
+prefix: '&8[&6&lsurwer&8] &7'
+
+#MySQL's settings
+#The plugin will not work without MySQL!
+MySQL.host: 'localhost'
+MySQL.port: 3306
+MySQL.database: 'database_name'
+MySQL.username: 'admin'
+MySQL.password: '123456'
+MySQL.useSSL: false
+MySQL.autoReconnect: true
