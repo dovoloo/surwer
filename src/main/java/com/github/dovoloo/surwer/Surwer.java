@@ -1,12 +1,14 @@
 package com.github.dovoloo.surwer;
 
 import com.github.dovoloo.surwer.listener.MainListener;
+import com.github.dovoloo.surwer.utils.GithubUpdateChecker;
 import com.github.dovoloo.surwer.utils.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Objects;
@@ -34,7 +36,11 @@ public final class Surwer extends JavaPlugin {
         logger.log(Level.INFO, "Status: Enabled");
         logger.log(Level.INFO, "===============================================");
         instance = this;
-        init();
+        try {
+            init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -69,8 +75,9 @@ public final class Surwer extends JavaPlugin {
     /**
      * Load config and initialize MySQL connection
      */
-    private void init() {
+    private void init() throws IOException {
         saveDefaultConfig();
+        new GithubUpdateChecker(this).checkForUpdates();
         if (Objects.requireNonNull(getConfig().getString("MySQL.database")).equalsIgnoreCase("database_name")) {
             logger.log(Level.WARNING, "Please setup MySQl in config.yml");
             mySQL = null;
